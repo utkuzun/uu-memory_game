@@ -263,6 +263,7 @@ main {
   border: 2px solid var(--clr-red-dark);
   border-radius: 10px;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Safari */
 }
 
 .back-img {
@@ -271,7 +272,6 @@ main {
 
 @media screen and (max-width: 900px) {
 
-  .main {}
 
   .card {
     width: 100px;
