@@ -269,7 +269,7 @@ main {
   transform: rotateY(180deg);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 900px) {
   .card {
     width: 100px;
     height: 100px;
