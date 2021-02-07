@@ -182,7 +182,7 @@ pre {
 main {
   display: flex;
   flex-direction: column;
-  margin:0;
+  margin: 10px 0;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -304,8 +304,8 @@ main h3{
   }
 
   main{
-    width: 90%;
-    margin: 10px 10px;
+    width: 100%;
+    margin: 10px 0;
   }
 }
 
@@ -333,7 +333,7 @@ main h3{
   }
 
   main{
-    width: 90%;
-    margin: 10px 10px;
+    width: 100%;
+    margin: 10px 0;
   }
 }
