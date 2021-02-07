@@ -138,7 +138,7 @@ function stopTime(bool) {
 
 function scoreMessage(timeText) {
     let highScore = getScoreLocal();
-    if (timeText < highScore) {
+    if (timeText < highScore && highScore == []) {
         time.textContent = `Yay!! You've set new record with ${timeText}s`;
         addToLocalStorage(timeText);
     } else {
