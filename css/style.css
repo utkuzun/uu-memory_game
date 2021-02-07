@@ -208,7 +208,6 @@ main h3{
   visibility: hidden;
   width: 50%;
   border-radius: 5px;
-  text-transform: capitalize;
   height: 2rem;
   margin-bottom: 0;
 }
