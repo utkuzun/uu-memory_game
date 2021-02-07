@@ -55,19 +55,19 @@ imgs.sort(() => 0.5 - Math.random());
 // DOM loaded
 
 const container = document.querySelector(".container");
-const score = document.querySelector(".score")
 const time = document.querySelector(".time")
 
 
 let scoreText = 0;
 let timeText = 0;
 
-document.addEventListener("DOMContentLoaded", createBoard);
+
 
 hasFlippedCard = false;
 lockedBord = false;
 let firstCard, secondCard;
 
+document.addEventListener("DOMContentLoaded", createBoard);
 
 function createBoard() {
     for (i = 0; i < imgs.length; i++) {
@@ -94,6 +94,9 @@ function createBoard() {
     }
 }
 
+
+// Game
+
 function flipCard() {
 
     if (lockedBord) return;
@@ -103,9 +106,9 @@ function flipCard() {
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
-
         return;
     }
+
     hasFlippedCard = false;
     secondCard = this;
 
@@ -118,21 +121,38 @@ function checkMatch() {
     isMatch = firstCard.dataset.id === secondCard.dataset.id;
     isMatch ? disableCards() : unFlippedCards();
 
-    if (isMatch) scoreText += 1;
-    score.textContent = `Score: ${scoreText}`;
+    stopTime (isMatch);
 
-    if(scoreText>imgs.length/2-1) {
-        score.textContent = `Congratulations!!! Refresh for a new game.`; 
+}
+
+function stopTime(bool) {
+    if (bool) scoreText += 1;
+    
+    if(scoreText>imgs.length/2-1) { 
         clearInterval(timer)
+        scoreMessage(timeText);
+    }
+
+    
+}
+
+function scoreMessage(timeText) {
+    let highScore = getScoreLocal();
+    if (timeText < highScore) {
+        time.textContent = `Yay!! You've set new record with ${timeText}s`;
+        addToLocalStorage(timeText);
+    } else {
+        time.textContent = `Your time is ${timeText}s. Record is ${highScore}s`
     }
 }
+
 
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 
-    resetBoard ()
+    resetBoard ();
 }
 
 function unFlippedCards() {
@@ -157,5 +177,15 @@ function resetBoard () {
 let timer = setInterval(() => {
     timeText+=1;
     time.textContent = `${timeText}s`;
-
 }, 1000);
+
+
+// Local Storage
+
+function getScoreLocal() {
+    return localStorage.getItem("number") ? JSON.parse(localStorage.getItem("number")) : [];
+}
+
+function addToLocalStorage(score) {
+    localStorage.setItem('number', JSON.stringify(score));
+}

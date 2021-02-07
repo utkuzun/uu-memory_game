@@ -187,6 +187,15 @@ main {
   justify-content: center;
   text-align: center;
   height: 100vh;
+  width: 100%;
+}
+
+main h3{
+  width: 100%;
+}
+
+.time{
+  width: 100%;
 }
 
 .alert {
@@ -286,33 +295,45 @@ main {
   }
 
   .container {
-    width: 90vh;
-    margin: 10px ;
+    width: 90%;
+    margin: 10px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+  }
+
+  main{
+    width: 90%;
+    margin: 10px 10px;
   }
 }
 
 
 @media screen and (max-width: 600px) {
   .card {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
 
   }
 
   .container.grid {
     display: grid;
-    grid-template-columns: repeat(4,50px);
+    grid-template-columns: repeat(4,75px);
     gap: 4px;
   }
 
   .container {
-    width: 90vh;
-
+    width: 90%;
+    margin: 10px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+  }
+
+  main{
+    width: 90%;
+    margin: 10px 10px;
   }
 }
