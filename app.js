@@ -78,9 +78,6 @@ let firstCard, secondCard;
 document.addEventListener("DOMContentLoaded", createBoard);
 
 
-
-
-
 function createBoard() {
     for (i = 0; i < imgs.length; i++) {
         var card = document.createElement('div');
@@ -150,7 +147,13 @@ function stopTime(bool) {
 
 function scoreMessage(timeText) {
     let highScore = getScoreLocal();
-    if ((timeText < highScore) || (highScore == [])) {
+
+    if(highScore.length === 0) {
+        addToLocalStorage(timeText);
+        highScore = getScoreLocal();
+    }
+
+    if ((timeText <= highScore)) {
         time.textContent = `Yay!! You've set new record with ${timeText}s`;
         addToLocalStorage(timeText);
     } else {
