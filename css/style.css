@@ -141,6 +141,9 @@ p {
     line-height: 1;
   }
 }
+
+
+
 /*  global classes */
 
 
@@ -260,10 +263,49 @@ main h3{
   transform: rotateY(180deg);
 }
 
-.card:active {
-  transform: scale(.97);
+.disp {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  padding: 10px 0;
+}
+
+.disp-btn {
+  font-size: 1.5rem;
+  color: var(--clr-grey-1);
+  border-radius: 4px;
+  border: 2px solid var(--clr-red-dark);
+  position: relative;
+  cursor: pointer;
+}
+
+.switch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  background: var(--clr-grey-1);
+  border-radius: 4px;
   transition: var(--transition);
 }
+
+.switch.left {
+  left: 50%; 
+  transition: var(--transition);
+}
+
+.switch-text {
+  padding: 5px;
+}
+
+.none .card.flip.turned {
+  visibility: hidden;
+}
+
 
 .front-img, .back-img{
   position: absolute;

@@ -56,6 +56,14 @@ imgs.sort(() => 0.5 - Math.random());
 
 const container = document.querySelector(".container");
 const time = document.querySelector(".time")
+const swButton = document.querySelector(".disp-btn")
+const sw = document.querySelector(".switch")
+
+swButton.addEventListener('click', function() {
+    sw.classList.toggle("left")
+    container.classList.toggle("none")
+})
+
 
 
 let scoreText = 0;
@@ -68,6 +76,10 @@ lockedBord = false;
 let firstCard, secondCard;
 
 document.addEventListener("DOMContentLoaded", createBoard);
+
+
+
+
 
 function createBoard() {
     for (i = 0; i < imgs.length; i++) {
@@ -151,6 +163,9 @@ function scoreMessage(timeText) {
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
+    
+    firstCard.classList.add("turned");
+    secondCard.classList.add("turned");
 
     resetBoard ();
 }
