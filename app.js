@@ -1,209 +1,166 @@
-const imgs = [
-    {
-        name: "utku",
-        url: "img/utku.jpg"
-    },
-    {
-        name: "utku",
-        url: "img/utku.jpg"
-    },
-    {
-        name: "berke",
-        url: "img/berke.jpg"
-    },
-    {
-        name: "berke",
-        url: "img/berke.jpg"
-    },
-    {
-        name: "serkan",
-        url: "img/serkan.jpg"
-    },
-    {
-        name: "serkan",
-        url: "img/serkan.jpg"
-    },
-    {
-        name: "emre",
-        url: "img/emre.jpg"
-    },
-    {
-        name: "emre",
-        url: "img/emre.jpg"
-    },
-    {
-        name: "göken",
-        url: "img/göken.jpg"
-    },
-    {
-        name: "göken",
-        url: "img/göken.jpg"
-    },
-    {
-        name: "murat",
-        url: "img/murat.jpg"
-    },
-    {
-        name: "murat",
-        url: "img/murat.jpg"
-    }
-]
 
 
-imgs.sort(() => 0.5 - Math.random());
 
-// DOM loaded
 
-const container = document.querySelector(".container");
-const time = document.querySelector(".time")
-const swButton = document.querySelector(".disp-btn")
-const sw = document.querySelector(".switch")
+const games = document.querySelectorAll(".game-tab");
+const tabs = document.querySelector(".tabs");
+const sw = document.querySelector(".switch");
+const swButton = document.querySelector(".disp-btn");
+const playBTn = document.querySelector(".play");
+const timeCont = document.querySelector(".time_cont");
+const times = document.querySelector(".time");
 
-swButton.addEventListener('click', function() {
-    sw.classList.toggle("left")
-    container.classList.toggle("none")
+
+tabs.addEventListener("click", toggleTab);
+
+swButton.addEventListener('click', function () {
+    sw.classList.toggle("left");
+    container.classList.toggle("none");
+    container30.classList.toggle("hidden");
 })
 
+function toggleTab(e) {
+    const id = e.target.dataset.id;
 
+    games.forEach(function (game) {
 
-let scoreText = 0;
-let timeText = 0;
-
-
-
-hasFlippedCard = false;
-lockedBord = false;
-let firstCard, secondCard;
-
-document.addEventListener("DOMContentLoaded", createBoard);
-
-
-function createBoard() {
-    for (i = 0; i < imgs.length; i++) {
-        var card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('data-id', `${imgs[i].name}`)
-        var imgFront = document.createElement('img');
-        imgFront.setAttribute('src', "img/mont.jpg");
-        // img.setAttribute('data-id', i);
-        imgFront.classList.add('img');
-        imgFront.classList.add('front-img');
-
-        var imgBack = document.createElement('img');
-        imgBack.setAttribute('src', `${imgs[i].url}`);
-        // img.setAttribute('data-id', i);
-        imgBack.classList.add('back-img');
-        imgBack.classList.add('img');
-
-        card.appendChild(imgBack);
-        card.appendChild(imgFront);
-
-        container.appendChild(card);
-        card.addEventListener('click', flipCard)
-    }
+        if (id) {
+            if (game.dataset.id === id) {
+                game.classList.remove("hide");
+            } else game.classList.add("hide");
+        }
+    })
 }
 
 
-// Game
 
-function flipCard() {
+// set the timer and time
 
-    if (lockedBord) return;
-    if(this===firstCard) return;
-    this.classList.toggle('flip');
+let isGameStarted = false
 
-    if (!hasFlippedCard) {
-        hasFlippedCard = true;
-        firstCard = this;
-        return;
-    }
+playBTn.addEventListener("click", scoreOps)
 
-    hasFlippedCard = false;
-    secondCard = this;
 
-    checkMatch();
+// let scoreText = 0;
+// let timeText = 0;
+
+// let timer = setInterval(() => {
+//     timeText+=1;
+//     time.textContent = `${timeText}s`;
+// }, 1000);
+
+
+
+function scoreOps() {
+
+    playBTn.removeEventListener("click", scoreOps);
+    tabs.removeEventListener("click", toggleTab);
+
+    isGameOver = false
+    isGameStarted = true
+    scoreNumber = 0
+    let startTime = new Date().getTime();
+
+    let timer = setInterval(() => {
+        let currentTime = new Date().getTime();
+        let t = currentTime - startTime;
+
+        let [min, sec, ms] = getMinSec(t);
+
+        locateInTime(min, sec, ms)
+
+        checkStop(t,timer);
+
+    }, 13);
+
 }
 
 
-function checkMatch() {
+function checkStop(t,timer) {
 
-    isMatch = firstCard.dataset.id === secondCard.dataset.id;
-    isMatch ? disableCards() : unFlippedCards();
+    let gameName = currentTab();
 
-    stopTime (isMatch);
-
-}
-
-function stopTime(bool) {
-    if (bool) scoreText += 1;
-    
-    if(scoreText>imgs.length/2-1) { 
+    if (isGameOver || (scoreNumber ==6)) {
         clearInterval(timer)
-        scoreMessage(timeText);
+        scoreMessage(gameName, t)
+        playBTn.addEventListener("click", scoreOps);
+        tabs.addEventListener("click", toggleTab);
+        isGameStarted = false;
     }
-
-    
 }
 
-function scoreMessage(timeText) {
-    let highScore = getScoreLocal();
 
-    if(highScore.length === 0) {
-        addToLocalStorage(timeText);
-        highScore = getScoreLocal();
+function scoreMessage(game_id, t) {
+
+    let highScore = getScoreLocal(game_id);
+
+
+    if (highScore.length === 0) {
+        addToLocalStorage(game_id, t);
+        highScore = getScoreLocal(game_id);
     }
 
-    if ((timeText <= highScore)) {
-        time.textContent = `Yay!! You've set new record with ${timeText}s`;
-        addToLocalStorage(timeText);
+    let [min, sec, ms] = getMinSec(t);
+    let [hmin, hsec, hms] = getMinSec(highScore.t);
+
+
+    if ((t <= highScore.t)) {   
+        times.innerHTML = `<h3 class="result"><span class="time_cont result">Yay!! You've set new record with ${format(min)}:${format(sec)}:${format(ms)}</span></h3>`;
+        addToLocalStorage(game_id, t);
     } else {
-        time.textContent = `Your time is ${timeText}s. Record is ${highScore}s`
+        times.innerHTML = `<h3 class="result"><span class="time_cont">Your time is ${format(min)}:${format(sec)}:${format(ms)}. Record is ${format(hmin)}:${format(hsec)}:${format(hms)}</span></h3>`
     }
 }
 
 
+function getMinSec(t) {
+    let min = Math.floor(t / (1000 * 60));
+    let sec = Math.floor((t % (60 * 1000)) / 1000);
+    let ms = Math.floor((t % 100));
 
-function disableCards() {
-    firstCard.removeEventListener('click', flipCard);
-    secondCard.removeEventListener('click', flipCard);
-    
-    firstCard.classList.add("turned");
-    secondCard.classList.add("turned");
-
-    resetBoard ();
-}
-
-function unFlippedCards() {
-    lockedBord = true;
-
-    setTimeout(() => {
-        firstCard.classList.remove("flip");
-        secondCard.classList.remove("flip");
-
-        resetBoard ();
-    }, 500);
+    return [min, sec, ms]
 }
 
 
 
-function resetBoard () {
-    [hasFlippedCard,lockedBord] = [false,false];
-    [firstCard,secondCard] = [null,null];
+function locateInTime(min, sec, ms) {
+    timeCont.textContent = `${format(min)}:${format(sec)}:${format(ms)}`;
 }
 
 
-let timer = setInterval(() => {
-    timeText+=1;
-    time.textContent = `${timeText}s`;
-}, 1000);
+
+function currentTab() {
+    let idname
+    games.forEach((game) => {
+        if (!game.classList.contains("hide")) {
+            idname = game.dataset.id;
+        }
+    })
+    return idname
+}
+
+function format(item) {
+    if (item < 10) {
+      return (item = `0${item}`);
+    }
+    return item;
+}
 
 
 // Local Storage
 
-function getScoreLocal() {
-    return localStorage.getItem("number") ? JSON.parse(localStorage.getItem("number")) : [];
+function getScoreLocal(game_id) {
+    return localStorage.getItem(`${game_id}`) ? JSON.parse(localStorage.getItem(`${game_id}`)) : [];
 }
 
-function addToLocalStorage(score) {
-    localStorage.setItem('number', JSON.stringify(score));
+function addToLocalStorage(game_id, t) {
+    score = {game_id, t}
+    localStorage.setItem(`${game_id}`, JSON.stringify(score));
 }
+
+
+
+
+
+
+
