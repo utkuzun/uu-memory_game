@@ -195,6 +195,14 @@ section {
   display: none;
 }
 
+.disp-btn.hide, .disp-btn2.hide{
+  display: none;
+}
+
+.time.hide, .time2.hide{
+  display: none;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -234,7 +242,7 @@ nav {
 
 
 
-.time{
+.time, .time2{
   width: 100%;
 }
 
@@ -319,7 +327,7 @@ main{
   padding: 10px 0;
 }
 
-.disp-btn {
+.disp-btn, .disp-btn2 {
   font-size: 1.5rem;
   color: var(--clr-grey-1);
   border-radius: 4px;
@@ -331,7 +339,7 @@ main{
   align-items: center;
 }
 
-.switch {
+.switch, .switch2 {
   position: absolute;
   top: 0;
   left: 0;
@@ -342,7 +350,7 @@ main{
   transition: var(--transition);
 }
 
-.switch.left {
+.switch.left, .switch2.left {
   left: 50%; 
   transition: var(--transition);
 }
@@ -370,7 +378,7 @@ main{
   transform: rotateY(180deg);
 }
 
-/* 1-25 game */
+/* 1-30 game */
 
 .container-30 {
   display: grid;
@@ -423,10 +431,40 @@ main{
   transition: var(--transition);
 }
 
+/* Tictactoe */
+
+.container-xox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.xox_card {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+  width: 100px;
+  border: solid 2px var(--clr-red-dark);
+  border-radius: 5px;
+  transition: var(--transition);
+
+}
+
+.xox_card h3 {
+  font-size: 4rem;
+  margin: 0;
+  transition: var(--transition);
+}
 
 /* time */
 
-.time {
+.time, .time2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -434,18 +472,18 @@ main{
   margin: 20px 0;
 }
 
-.time span {
+.time span, .time2 span {
   width: 100%;
 }
 
-.time h3 {
+.time h3, .time2 h3 {
   margin: 0;
   width: 12rem;
   font-size: 1.3rem;
   height: 100%;
 }
 
-.time h3.result {
+.time h3.result, .time2 h3.result {
   width: 100%;
 }
 
@@ -524,7 +562,7 @@ main{
     font-size: 1rem;
   }
 
-  .time h3 {
+  .time h3, .time2 h3 {
     width: 7rem;
     font-size: 0.9rem;
 
