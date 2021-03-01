@@ -6,9 +6,11 @@ const games = document.querySelectorAll(".game-tab");
 const tabs = document.querySelector(".tabs");
 const sw = document.querySelector(".switch");
 const swButton = document.querySelector(".disp-btn");
+const swButton2 = document.querySelector(".disp-btn2");
 const playBTn = document.querySelector(".play");
 const timeCont = document.querySelector(".time_cont");
 const times = document.querySelector(".time");
+const times2 = document.querySelector(".time2");
 
 
 tabs.addEventListener("click", toggleTab);
@@ -23,15 +25,33 @@ function toggleTab(e) {
     const id = e.target.dataset.id;
 
     games.forEach(function (game) {
-
         if (id) {
             if (game.dataset.id === id) {
                 game.classList.remove("hide");
             } else game.classList.add("hide");
         }
     })
+
+    let idname = currentTab()
+
+    switchButtonBtns(idname);
+
 }
 
+
+function switchButtonBtns (idname) {
+    if (idname === "XOX") {
+        swButton.classList.add("hide")
+        swButton2.classList.remove("hide")
+        times.classList.add("hide")
+        times2.classList.remove("hide")
+    } else {
+        swButton2.classList.add("hide")
+        swButton.classList.remove("hide")
+        times2.classList.add("hide")
+        times.classList.remove("hide")
+    }
+}
 
 
 // set the timer and time
@@ -83,8 +103,8 @@ function checkStop(t,timer) {
     if (isGameOver || (scoreNumber ==6)) {
         clearInterval(timer)
         scoreMessage(gameName, t)
-        playBTn.addEventListener("click", scoreOps);
-        tabs.addEventListener("click", toggleTab);
+        // playBTn.addEventListener("click", scoreOps);
+        // tabs.addEventListener("click", toggleTab);
         isGameStarted = false;
     }
 }
