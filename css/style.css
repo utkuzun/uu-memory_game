@@ -95,7 +95,7 @@ h1,
 h2,
 h3,
 h4 {
-  letter-spacing: var(--spacing);
+  /* letter-spacing: var(--spacing); */
   line-height: 1.25;
   margin-bottom: 0.75rem;
   font-family: var(--ff-primary);
@@ -483,6 +483,10 @@ main{
   height: 100%;
 }
 
+.time2 h3 {
+  width: 100%;
+}
+
 .time h3.result, .time2 h3.result {
   width: 100%;
 }
@@ -572,6 +576,21 @@ main{
     font-size: 1.25rem;
   }
 
+  .time2 h3 {
+    width: 100%;
+  }
+
+  .xox_card {
+    height: 70px;
+    width: 70px;
+    border-radius: 5px;  
+  }
+  
+  .xox_card h3 {
+    font-size: 3rem;
+    margin: 0;
+  }
+
 }
 
 
@@ -634,5 +653,20 @@ main{
 
   .play {
     font-size: 1rem;
+  }
+
+  .time2 h3 {
+    width: 100%;
+  }
+
+  .xox_card {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;  
+  }
+  
+  .xox_card h3 {
+    font-size: 2.2rem;
+    margin: 0;
   }
 }

@@ -1,6 +1,7 @@
 
 const containerXox = document.querySelector(".container-xox");
 const sw2 = document.querySelector(".switch2");
+const winStats = document.querySelector(".time2 .time_cont");
 
 
 createBoard()
@@ -38,18 +39,22 @@ function humanPlayerMove(e) {
             isXTurn = false
         }
     
-        
-        
-        if ((!game.currentWinner) && (!isXTurn)) {
-            let square = oPlayer.player_move(game);
-    
-            setTimeout(() => {
-                game.make_move("O", parseInt(square));
+        if (game.empty_square() > 0) {
+
+            if ((!game.currentWinner) && (!isXTurn)) {
+                let square = oPlayer.player_move(game);
                 isXTurn = true
-                sw2.classList.remove("left");
-            }, 500)
-        
+                setTimeout(() => {
+                    game.make_move("O", parseInt(square));
+                    
+                    sw2.classList.remove("left");
+                }, 500)
+            
+            }
+
         }
+        
+
 
     }
 
@@ -100,8 +105,14 @@ class TicTacToe {
                 place.querySelector(".letter").textContent = letter
             }
         });
+
         if (this.winner()) {
             this.currentWinner = letter
+            localStorageOps(letter)
+        }
+
+        if (this.empty_square() === 0 && !this.winner()) {
+            localStorageOps("T")
         }
     }
 
@@ -144,7 +155,7 @@ class TicTacToe {
             return true
         }
 
-        let diaognal2 = [itemArray[2].square, itemArray[4].square, itemArray[4].square];
+        let diaognal2 = [itemArray[2].square, itemArray[4].square, itemArray[6].square];
         if ((diaognal2.every(checkO)) || (diaognal2.every(checkX))) {
             return true
         }
@@ -174,6 +185,7 @@ function checkO(letter) {
 function checkX(letter) {
     return letter == "X" 
 }
+
 
 function range(start, end, interval) {
     let ans = [];
@@ -222,3 +234,39 @@ function disableXoxCard(move) {
     })
 }
 
+function localStorageOps(winFlag) {
+
+    addToLocalStorageXox(winFlag);
+}
+
+function addToLocalStorageXox(winflag) {
+    let stats = getScoreLocalXox()
+
+    if (stats.length === 0){
+        stats = {
+            "X" : 0,
+            "O" : 0,
+            "T" : 0
+        }
+    }
+
+    if (winflag === "X") {
+        stats.X += 1;
+    } else if (winflag === "O") {
+        stats.O += 1;
+    } else {
+        stats.T += 1;
+    }
+
+    localStorage.setItem("xox", JSON.stringify(stats));
+    writeWinStats(stats)
+
+}
+
+function writeWinStats(stats) {
+    winStats.textContent = `X: ${stats.X}, O: ${stats.O}, Tie: ${stats.T}`
+}
+
+function getScoreLocalXox() {
+    return localStorage.getItem("xox") ? JSON.parse(localStorage.getItem("xox")) : [];
+}

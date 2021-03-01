@@ -103,8 +103,8 @@ function checkStop(t,timer) {
     if (isGameOver || (scoreNumber ==6)) {
         clearInterval(timer)
         scoreMessage(gameName, t)
-        playBTn.addEventListener("click", scoreOps);
-        tabs.addEventListener("click", toggleTab);
+        // playBTn.addEventListener("click", scoreOps);
+        // tabs.addEventListener("click", toggleTab);
         isGameStarted = false;
     }
 }
