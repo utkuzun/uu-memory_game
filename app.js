@@ -45,6 +45,11 @@ function switchButtonBtns (idname) {
         swButton2.classList.remove("hide")
         times.classList.add("hide")
         times2.classList.remove("hide")
+    } else if (idname === "minesweeper") {
+        swButton2.classList.add("hide")
+        swButton.classList.add("hide")
+        times2.classList.add("hide")
+        times.classList.add("hide")  
     } else {
         swButton2.classList.add("hide")
         swButton.classList.remove("hide")

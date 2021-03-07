@@ -462,6 +462,79 @@ main{
   transition: var(--transition);
 }
 
+/* Minesweeper */
+
+.container-mine {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
+  min-height: 300px;
+}
+
+.mine-card {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--clr-red-dark);
+  background-color: #fff;
+  transform: var(--transition);
+}
+
+.mine-card .letter{
+  font-size: 2rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transition: var(--transition);
+  line-height: normal;
+}
+
+.mine_input {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+} 
+
+#mine_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mine_control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.mine_label {
+  font-size: 2rem;
+  padding: 5px 15px;
+}
+
+.mine_control input {
+  font-size: 1.5rem;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 /* time */
 
 .time, .time2 {
@@ -491,7 +564,7 @@ main{
   width: 100%;
 }
 
-.play {
+.play, .play_mine {
   cursor: pointer;
   font-size: 1.75rem;
   border-radius: 5px;
@@ -500,7 +573,7 @@ main{
   border: 2px solid var(--clr-red-dark);
 }
 
-.play:hover {
+.play:hover, .play_mine:hover {
   transition: var(--transition);
   transform: scale(1.1);
 }
@@ -572,7 +645,7 @@ main{
 
   }
   
-  .play {
+  .play, .play_mine {
     font-size: 1.25rem;
   }
 
@@ -651,7 +724,7 @@ main{
     font-size: 0.7rem;
   }
 
-  .play {
+  .play, .play_mine {
     font-size: 1rem;
   }
 

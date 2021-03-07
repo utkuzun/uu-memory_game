@@ -10,20 +10,21 @@
 
 <body>
 
-    <main> 
+    <main>
 
         <nav>
             <div class="tabs">
                 <button data-id="memory-game">Memory Game</button>
                 <button data-id="1--30">1 -- 30</button>
                 <button data-id="XOX">TicTacToe</button>
+                <button data-id=minesweeper>Minesweeper</button>
             </div>
         </nav>
 
         <section class="game-tab hide" data-id="memory-game">
 
             <div class="container-mem grid">
-    
+
             </div>
 
 
@@ -31,15 +32,36 @@
 
         <section class="game-tab hide" data-id="1--30">
             <div class="container-30">
- 
+
             </div>
         </section>
 
-        <section class="game-tab" data-id="XOX">
+        <section class="game-tab hide" data-id="XOX">
             <div class="container-xox">
                 <!-- <div class="xox_card" data-id="0">
                     <h3 class="letter">X</h3>
                 </div> -->
+            </div>
+        </section>
+
+        <section class="game-tab" data-id="minesweeper">
+            <div class="container-mine">
+                <div class="mine-card" data-id="0">
+                    <h3 class="letter">*</h3>
+                </div>
+            </div>
+
+            <div class="mine_input">
+                <form id="mine_form">
+                    <div class="mine_control">
+                        <label class="mine_label">Dimsize</label>
+                        <input class="dimsize_input" type="text" placeholder="Type dimsize">
+                    </div>
+
+                    <button class="play_mine" type="submit">Play</button>
+                </form>
+
+
             </div>
         </section>
 
@@ -62,7 +84,7 @@
         </div>
 
         <div class="disp">
-            <button class="disp-btn2 ">
+            <button class="disp-btn2 hide">
                 <span class="switch-text">O</span>
                 <span class="switch-text">X</span>
                 <span class="switch2"></span>
@@ -74,6 +96,7 @@
     <script src="memory.js"></script>
     <script src="30.js"></script>
     <script src="xox.js"></script>
+    <script src="mine.js"></script>
 </body>
 
 </html>
