@@ -467,12 +467,11 @@ main{
 .container-mine {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 2px;
   justify-content: center;
   align-items: center;
   text-align: center;
   transition: var(--transition);
-  min-height: 300px;
+  margin:50px 0;
 }
 
 .mine-card {
@@ -483,17 +482,24 @@ main{
   align-items: center;
   text-align: center;
   border: 1px solid var(--clr-red-dark);
-  background-color: #fff;
-  transform: var(--transition);
+  background-color: var(--clr-primary-7);
+  border-radius: 3px;
+  transition: var(--transition);
+}
+
+.mine-card:hover{
+  transform: scale(1.1);
+  transition: var(--transition);
 }
 
 .mine-card .letter{
-  font-size: 2rem;
+
+  font-size: 1rem;
   width: 100%;
-  height: 100%;
   margin: 0;
   transition: var(--transition);
   line-height: normal;
+  display: none;
 }
 
 .mine_input {
@@ -664,6 +670,37 @@ main{
     margin: 0;
   }
 
+  .mine_label {
+    font-size: 1.3rem;
+    padding: 3px 10px;
+  }
+  
+  .mine_control input {
+    font-size: 1.1rem;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .container-mine {
+    margin:30px 0;
+  }
+  
+  .mine-card {
+    width: 30px;
+    height: 30px;
+  }
+  
+  
+  .mine-card .letter{
+  
+    font-size: 1rem;
+    width: 100%;
+    margin: 0;
+    transition: var(--transition);
+    line-height: normal;
+    display: none;
+  }
+
 }
 
 
@@ -741,5 +778,31 @@ main{
   .xox_card h3 {
     font-size: 2.2rem;
     margin: 0;
+  }
+
+  .mine_label {
+    font-size: 1rem;
+    padding: 3px 10px;
+  }
+  
+  .mine_control input {
+    font-size: 0.9rem;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .container-mine {
+    margin:15px 0;
+  }
+  
+  .mine-card {
+    width: 20px;
+    height: 20px;
+  }
+  
+  
+  .mine-card .letter{  
+    font-size: 0.7rem;
+
   }
 }
